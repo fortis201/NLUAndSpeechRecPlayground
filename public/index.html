@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- This site was created by J.V. Estolas -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>API AI Playground with Annyang! Speech Recognition</title>
+    <meta name="description" content="This app is my playground for testing the api.ai Natural Language Understanding (NLU) API and Annyang! speech recognition">
+    <meta name="author" content="J.V. Estolas">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
+
+    <!-- Less CSS -->
+    <link rel="stylesheet" type="text/css" href="css/styles.less">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link rel="stylesheet" href="./assets/stylesheets/main.css">
+
+</head>
+<body >
+
+    <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div id="topnav">
+        <nav>
+            <ul>
+                <li class="inline">
+                    <a href="#/">Ask AI Anything</a>
+                </li>
+                <li class="inline">
+                    <a href="#/dash">Order Pizza</a>
+                </li>
+
+            </ul>
+        </nav>
+    </div>
+    <div ng-app="myApp">
+        <div ng-view>
+        </div>
+    </div>
+    <div id="fooer"></div>
+
+
+    <!-- ############################### -->
+    <!-- Scripts  -->
+    <!-- ############################### -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.3.min.js"><\/script>')</script>
+
+    <!-- Annyang! Speech recognition API -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.2.1/annyang.min.js"></script>
+    
+    <!-- Angular, Animate, Route -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-animate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.2/angular-route.min.js"></script>
+    <script src="./components/app.js"></script>
+    <script src="./components/home/home.js"></script>
+    <script src="./components/dash/dash.js"></script>
+</body>
+</html>
