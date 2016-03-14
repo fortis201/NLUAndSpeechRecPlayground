@@ -22,7 +22,7 @@ app.get('/', function (req, res) {
 var apiai = require('apiai');
 var apiaiBUrl = "https://api.api.ai/v1/";
 
-var agentZero = apiai("07f265e6e3cf4d27acb0cb60374da632", "ee49bf5b-f7e5-4f5e-938d-3330fc31e7a7");
+var agentZero = apiai("2231bea759c4431bbb20931b23d72af4", "ee49bf5b-f7e5-4f5e-938d-3330fc31e7a7");
 var pizzaOrderAgent = apiai("07f265e6e3cf4d27acb0cb60374da632","ee49bf5b-f7e5-4f5e-938d-3330fc31e7a7");
 
 // ============================
@@ -34,15 +34,18 @@ app.post('/ama', function (req, res) {
 	console.log(req.body);
 	var zeroRequest = agentZero.textRequest(req.body.userQuery);
  
-	zeroRequest.on('response', function(response) {
+	zeroRequest.on('response', function(e) {
 		console.log('response received from apiai:');
-		if (response.result.source === 'domains') {
-			console.log("Response source is from a Domain: \n", response);
-			res.json({result: response.result.metadata});
+		if (e.result.source === 'domains') {
+			console.log("Response source is from a Domain: \n", e);
+
+			e.result.metadata.speech.length > 1 ? res.json({msg: e.result.metadata.html, result: e.result.metadata.speech}) : res.json({result: e.result.metadata})
+
+			// res.json({result: e.result.metadata});
 		}
 		else {
-			console.log("Response came from Agent: \n", response);
-			res.json({result: response});
+			console.log("Response came from Agent: \n", e);
+			res.json({result: e});
 		}
 	});
 	 
@@ -72,29 +75,6 @@ app.post('/orderPizza', function (req, res) {
 
 	pizzaRequest.end();
 })
-
-app.post('/resetParams', function (req, res) {
-	console.log("attempting to reset form with the following input:");
-	console.log(req.body);
-
-	console.log(" ############# req.headers #############");
-	console.log(req.headers)
-
-	pizzaIntentReset = pizzaOrderAgent.post(apiaiBUrl + '/query?v=20160311', function (req, res) {
-		console.log("============== REQ IS: ==============")
-		console.log(req);
-		console.log("============== RESPONSE IS: ==============")
-		console.log(res);
-	})
-
-	console.log(pizzaIntentReset);
-	// pizzaRequest.on('response', function (e) {
-	// 	console.log("reset response received:");
-	// 	console.log(e);
-	// })
-	// apiai request here...
-})
-
 
 var server = app.listen(1232, function () {
 	console.log('Established connection to 1232.');

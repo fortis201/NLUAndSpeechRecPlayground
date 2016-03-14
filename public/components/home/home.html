@@ -1,18 +1,17 @@
-<div>
+<div class="row">
 <!-- 	<h1>Home.html</h1>
 	<button ng-click="testMsg()">Test button</button> -->
 
-	<h2>AMA - API AI</h2>
-	<h4>Ask me anything!</h4>
-	<input type="text" ng-model="askTheAi.userQuery">
-	<input class="btn" type="submit" ng-click="sendUserQuery()" value="Submit yoru question!">
+	<div class="col s6 m6 l6 offset-s1 offset-m1 offset-l1">
+		<h2>AMA - API AI</h2>
+		<h4>Ask me anything!</h4>
+		<input type="text" ng-model="askTheAi.userQuery">
+		<input class="btn" type="submit" ng-click="sendUserQuery()" value="Submit yoru question!">
 
-	<br></br>
-	<h2>AI responds:</h2>
-	<!-- <div ng-repeat="aiResponse in aiResponses"> -->
-		<p><span ng-bind="aiResponses.html"></span></p>
-		<p><span ng-bind="aiResponses.speech"></span></p>
-		<p><span ng-bind="aiResponses.result"></span></p>
-	<!-- </div> -->
-
+		<br></br>
+		<h4>AI responds:</h4>
+		<div ng-repeat="aiResponse in aiResponses">
+			<p>{{ aiResponse }}</p>
+		</div>
+	</div>
 </div>

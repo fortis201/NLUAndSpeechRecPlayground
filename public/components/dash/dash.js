@@ -20,15 +20,6 @@ angular.module('myApp.dash', ['ngRoute'])
 				callback(e);
 			})
 		},
-
-		// resetParams: function (info, callback) {
-		// 	console.log("in factory... attempting to reset intent params");
-		// 	$http.post('/resetParams', info).then(function (e) {
-		// 		console.log('response received from server after params reset attempt:');
-		// 		consoel.log(e);
-		// 		callback(e);
-		// 	})
-		// }
 	}
 })
 
@@ -38,6 +29,24 @@ angular.module('myApp.dash', ['ngRoute'])
 	$scope.aiResponse = {};
 	$scope.aiResponse.msg = "Say a greeting to begin your order.";
 	$scope.pizzaParams;
+
+	$scope.pushQueryToFactory = function (p) {
+		dashFactory.sendUserQuery(p, function (e) {
+			console.log("PizzaController received the following form the factory:");
+			console.log(e);
+
+			if (e.data.response.id) {
+				$scope.resId = e.data.response.id;
+			}
+
+			if (e.data.response.result.fulfillment.speech.length > 0) {
+				$scope.aiResponse.msg = e.data.response.result.fulfillment.speech;
+				console.log("resId is: ");
+				console.log($scope.resId);
+			}
+			$scope.pizzaParams = e.data.response.result.parameters;
+		})
+	}
 
 	if (annyang) {
 		console.log("Annyang! is ready");
@@ -52,26 +61,34 @@ angular.module('myApp.dash', ['ngRoute'])
 		annyang.start();
 	}
 
+	$scope.sendVoiceQuery = function (e) {
+		console.log("Speech input received: ");
+		console.log(e);
+
+		$scope.pushQueryToFactory(e);
+	}
+
 	$scope.sendUserQuery = function () {
 		console.log("Getting ready to send your request...");
 		console.log($scope.orderPizza);
-		dashFactory.sendUserQuery($scope.orderPizza, function (e) {
-			console.log("pizza controller received the following:");
-			console.log(e);
+		// dashFactory.sendUserQuery($scope.orderPizza, function (e) {
+		// 	console.log("pizza controller received the following:");
+		// 	console.log(e);
 
-			if (e.data.response.id) {
-				$scope.resId = e.data.response.id;
-			}
+		// 	if (e.data.response.id) {
+		// 		$scope.resId = e.data.response.id;
+		// 	}
 
-			if (e.data.response.result.fulfillment.speech.length > 0) {
-				$scope.aiResponse.msg = e.data.response.result.fulfillment.speech;
-				console.log("resId is: ");
-				console.log($scope.resId);
-			}
-			$scope.pizzaParams = e.data.response.result.parameters;
-		})			
+		// 	if (e.data.response.result.fulfillment.speech.length > 0) {
+		// 		$scope.aiResponse.msg = e.data.response.result.fulfillment.speech;
+		// 		console.log("resId is: ");
+		// 		console.log($scope.resId);
+		// 	}
+		// 	$scope.pizzaParams = e.data.response.result.parameters;
+		// })			
+	
+		$scope.pushQueryToFactory($scope.orderPizza);
+
 		$scope.orderPizza = {};
 	}
-
-
 })

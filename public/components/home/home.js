@@ -42,6 +42,8 @@ angular.module('myApp.home', ['ngRoute'])
 			$scope.aiResponses.message = e.data.result.html;
 			e.data.result.speech ? $scope.aiResponses.speech = e.data.result.speech : $scope.aiResponses.result = e.data.result
 		});
+
+		$scope.askTheAi = {};
 	}
 
 })
