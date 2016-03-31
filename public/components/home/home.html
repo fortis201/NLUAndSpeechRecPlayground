@@ -1,17 +1,73 @@
 <div class="row">
-<!-- 	<h1>Home.html</h1>
-	<button ng-click="testMsg()">Test button</button> -->
+	<div class="col s9 m9 l9 offset-s1 offset-m1 offset-l1">
+		<div class="row">
+			<h2>Speech Synthesizer Voices List:</h2>
+			<div class="col s3 m3 l3">
+				<h4>En-US voices:</h4>
+				<ul ng-repeat="voice in vList">
+					<li ng-if="voice.lang == 'en-US'">{{ voice.name }}</li>
+				</ul>
+			</div>
 
-	<div class="col s6 m6 l6 offset-s1 offset-m1 offset-l1">
-		<h2>AMA - API AI</h2>
-		<h4>Ask me anything!</h4>
-		<input type="text" ng-model="askTheAi.userQuery">
-		<input class="btn" type="submit" ng-click="sendUserQuery()" value="Submit yoru question!">
+			<div class="col s3 m3 l3">
+				<h4>Containing "e"</h4>
+				<ul ng-repeat="voice in vList">
+					<li ng-if="voice.lang.split('')[0] == 'e'">{{ voice.name }}</li>
+				</ul>
+			</div>
+			<div class="col s6 m6 l6">
+				<h6>Enter a SS voice name to see the full object. Mesasge will be replayed.</h6>
+				<div class="divider"></div>
+				<label for="langName"></label>
+				<input type="text" name="langName" ng-model="theVoice.name" enter-pressed="getVoiceObj(theVoice.name)">
 
-		<br></br>
-		<h4>AI responds:</h4>
-		<div ng-repeat="aiResponse in aiResponses">
-			<p>{{ aiResponse }}</p>
+				<div class="row">
+					<ul class="col s3 m3 l3">
+						<li>Hash Key: </li>
+						<li>Default: </li>
+						<li>Language: </li>
+						<li>Local Service: </li>
+						<li>Name: </li>
+						<li>URI: </li>
+					</ul>
+
+					<ul class="col s2 m2 l2 offset-s1 offset-m1 offset-l1">
+						<li>{{ theVoice.obj.$$hashKey }} </li>
+						<li>{{ theVoice.obj.default }} </li>
+						<li>{{ theVoice.obj.lang }} </li>
+						<li>{{ theVoice.obj.localService }} </li>
+						<li>{{ theVoice.obj.name }} </li>
+						<li>{{ theVoice.obj.voiceURI }} </li>
+					</ul>
+				</div>
+			</div>
 		</div>
+	</div>
+</div>
+
+<div class="row">
+	<h2>AMA - API AI</h2>
+	<h4>Ask me anything!</h4>
+	<input type="text" ng-model="askTheAi.userQuery">
+	<button class="btn waves-effect waves-indigo" type="submit" ng-click="sendUserQuery()">Submit yoru question!</button>
+
+	<br></br>
+	<h4>AI responds:</h4>
+	<div ng-repeat="aiResponse in aiResponses">
+		<p>{{ aiResponse }}</p>
+	</div>
+</div>
+<br></br>
+
+<div class="divider"></div>
+
+<br></br>
+<div class="row"></div>
+	<div class="col s6 m6 l6 offset-s1 offset-m1 offset-l1">
+		<h4>Create an apiCaller entry:</h4>
+		<input type="text" placeholder="">
+		<input type="text" placeholder="">
+		<button class="btn waves-effect waves-light" type="submit" class="btn" >Create!</button>
+
 	</div>
 </div>

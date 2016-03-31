@@ -1,4 +1,5 @@
 'use strict';
+console.log("app.js has loaded");
 
 // Declare app level module which depends on views, and components
 angular.module('myApp', [
@@ -10,10 +11,4 @@ angular.module('myApp', [
   $routeProvider
   .when('#/dash', {redirectTo: '/dash'})
   .otherwise({redirectTo: '/home'})
-}]);
-
-console.log("end of app.js");
-
-// module.exports = (function () {
-// 	return myApp;
-// })();
+}])
