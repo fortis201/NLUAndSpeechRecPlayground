@@ -5,7 +5,8 @@ console.log("app.js has loaded");
 angular.module('myApp', [
   'ngRoute', 
   'myApp.home',
-  'myApp.dash'
+  'myApp.dash',
+  'myApp.fbGraph'
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider
